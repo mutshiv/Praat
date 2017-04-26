@@ -1,5 +1,6 @@
 package za.gov.parliament.praat.activities;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,6 +82,24 @@ public class ChatActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mNewMessageReceiver,mIntentFilter);
+    }
+
+    private boolean isChatServiceRunning()
+    {
+        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> runningServiceInfoList = activityManager.getRunningServices(Integer.MAX_VALUE);
+        Log.d(TAG, "************+++"+ ChatService.class.getSimpleName() +"+++***********");
+
+        for (ActivityManager.RunningServiceInfo runningServiceInfo : runningServiceInfoList)
+        {
+            Log.d(TAG, "+++++" + runningServiceInfo.service.getClassName());
+
+            if (runningServiceInfo.service.getClass().getSimpleName() == ChatService.class.getSimpleName()){
+                String className = runningServiceInfo.service.getClass().getSimpleName();
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
