@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import za.gov.parliament.praat.R;
 import za.gov.parliament.praat.app.ChatApp;
-import za.gov.parliament.praat.services.ChartService;
+import za.gov.parliament.praat.services.ChatService;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -65,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        Intent intentService = new Intent(this, ChartService.class);
+        Intent intentService = new Intent(this, ChatService.class);
 
         switch (id)
         {

@@ -17,13 +17,13 @@ import za.gov.parliament.praat.app.ChatApp;
 import za.gov.parliament.praat.utils.Constants;
 
 
-public class ChartService extends Service {
+public class ChatService extends Service {
 
-    private static final String TAG = ChartService.class.getSimpleName();
+    private static final String TAG = ChatService.class.getSimpleName();
     private String nickname;
     private Socket socket;
 
-    public ChartService() {
+    public ChatService() {
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ChartService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "onCreate ChartService");
+        Log.d(TAG, "onCreate ChatService");
 
         nickname = ((ChatApp) getApplication()).getSharedPreferences().getString(Constants.NICKNAME, "Guest");
 
@@ -48,6 +48,7 @@ public class ChartService extends Service {
             @Override
             public void call(Object... args) {
                 socket.emit(Constants.ACTION_ADD_USER, nickname);
+                Log.d(TAG, "connected");
             }
         });
 

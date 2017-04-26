@@ -3,6 +3,7 @@
     package="za.gov.parliament.praat">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".app.ChatApp"
@@ -39,9 +40,18 @@
             android:name=".services.MyIntentService"
             android:exported="false" />
         <service
-            android:name=".services.ChartService"
+            android:name=".services.ChatService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <receiver
+            android:name=".receivers.BootReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
